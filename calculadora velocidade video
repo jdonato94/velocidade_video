@@ -1,0 +1,65 @@
+import math
+
+class AlteracaoTempo:  
+    
+    def conversor(self, horas, minutos, segundos, alteracao):
+        velocidades = [.25,.5,.75,1.25,1.5,1.75,2]
+        segundos_alterados_total = 0
+        segundos_alterados = 0
+        sobra_segundos = 0
+        minutos_alterados_total = 0
+        minutos_alterados = 0
+        sobra_minutos = 0
+        horas_alteradas_total = 0
+        horas_alteradas = 0
+        sobra_horas = 0
+
+        if alteracao < 1:
+            segundos_alterados_total = segundos / velocidades[alteracao - 1]
+            segundos_alterados = math.floor(segundos_alterados_total / 60)
+            sobra_segundos = segundos_alterados_total % 60
+            minutos_alterados_total = (minutos / velocidades[alteracao - 1]) + segundos_alterados
+            minutos_alterados = math.floor(minutos_alterados_total / 60)
+            sobra_minutos = minutos_alterados_total % 60
+            horas_alteradas = (horas / velocidades[alteracao - 1]) + minutos_alterados
+            print(f'''O tempo original de {horas} horas, {minutos} minutos e {segundos} segundos, na velocidade de {alteracao} é igual a:
+            {horas_alteradas} horas, {sobra_minutos} minutos e {sobra_segundos} segundos.
+            ''')
+        elif alteracao > 1:
+            horas_alteradas_total = (horas*60) / velocidades[alteracao - 1] 
+            horas_alteradas = math.floor(horas_alteradas_total / 60)
+            sobra_horas = horas_alteradas_total % 60
+            minutos_alterados_total = (minutos / velocidades[alteracao - 1]) + sobra_horas
+            minutos_alterados = math.floor(minutos_alterados_total / 60)
+            sobra_minutos = minutos_alterados_total % 60 
+            segundos_alterados_total = segundos / velocidades[alteracao - 1] + sobra_segundos
+            segundos_alterados = math.floor(segundos_alterados_total / 60)
+            sobra_segundos = segundos_alterados_total % 60
+            print(f'''O tempo original de {horas} hora(s), {minutos} minuto(s) e {segundos} segundo(s), na velocidade {velocidades[alteracao-1]} é igual a:
+            {math.floor(horas_alteradas)} hora(s), {math.floor(sobra_minutos + segundos_alterados)} minuto(s) e {math.floor(sobra_segundos)} segundo(s).
+            ''')
+        else: 
+            print('erro')
+    
+    a = 1
+    hora_original = int(input('Digite o valor de horas: '))
+    minuto_original = int(input('Digite o valor de minutos: '))
+    segundo_original = int(input('Digite o valor de segundos: '))  
+    velocidade = int(input('''Escolha a alteração de tempo do vídeo:
+                        1. .25
+                        2. .5
+                        3. .75
+                        4. 1.25
+                        5. 1.5
+                        6. 1.75
+                        7. 2
+                        '''))
+    conversor(a, hora_original, minuto_original, segundo_original, velocidade)
+        
+        
+   
+            
+    
+
+
+AlteracaoTempo()
